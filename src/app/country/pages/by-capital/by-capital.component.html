@@ -1,0 +1,13 @@
+<h3 class="mt-2 text-black-50">Por Capital</h3>
+<hr>
+<div class="row">
+  <div class="col">
+    <app-search-country (handleSearchCountry)="searching($event)" (onDebounce)="searchCountryAucomplete($event)" placeholder="Search capital..."></app-search-country>
+  </div>
+</div>
+<hr>
+<div *ngIf="error" class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>Sin resultados!</strong> No se encontró ningun resultado para search.
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+<app-table-country [countries]="countries"></app-table-country>

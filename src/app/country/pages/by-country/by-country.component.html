@@ -1,0 +1,18 @@
+<h3 class="mt-2 text-black-50">Por Pais</h3>
+<hr>
+<div class="row">
+  <div class="col">
+    <app-search-country (handleSearchCountry)="searching($event)" (onDebounce)="searchCountryAucomplete($event)" placeholder="Search country..."></app-search-country>
+  </div>
+</div>
+<ul class="list-group" *ngIf="showSugeridos">
+  <li *ngFor="let pais of countriesSugeridos" class="list-group-item list-group-item-action">
+    <a class="nav-link" [routerLink]="['/country',pais.cca2]">{{pais.name.common}}</a>
+  </li>
+</ul>
+<hr>
+<div *ngIf="error" class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>Sin resultados!</strong> No se encontró ningun resultado para search.
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+<app-table-country [countries]="countries"></app-table-country>
