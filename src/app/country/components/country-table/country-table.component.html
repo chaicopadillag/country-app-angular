@@ -1,0 +1,42 @@
+<div *ngIf="countries.length===0; else tableContries" class="flex bg-blue-100 rounded-lg p-4 mb-4 text-sm text-blue-700" role="alert">
+  <svg class="w-5 h-5 inline mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+  </svg>
+  <div>
+    <span class="font-medium">Info!</span> No hay paises que mostrar.
+  </div>
+</div>
+
+<ng-template #tableContries>
+
+  <table class="w-full min-w-[460px]">
+    <thead>
+      <tr>
+        <th class="text-[12px] uppercase tracking-wide font-medium text-gray-400 py-2 px-4 bg-gray-50 text-left rounded-tl-md rounded-bl-md">Pais</th>
+        <th class="text-[12px] uppercase tracking-wide font-medium text-gray-400 py-2 px-4 bg-gray-50 text-left">Capital</th>
+        <th class="text-[12px] uppercase tracking-wide font-medium text-gray-400 py-2 px-4 bg-gray-50 text-left rounded-tr-md rounded-br-md">Población</th>
+        <th class="text-[12px] uppercase tracking-wide font-medium text-gray-400 py-2 px-4 bg-gray-50 text-left rounded-tr-md rounded-br-md">Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let country of countries">
+        <td class="py-2 px-4 border-b border-b-gray-50">
+          <div class="flex items-center">
+            <img [src]="country.flags.svg" alt="" class="w-8 h-8 rounded object-cover block" [alt]="country.name.common">
+            <a href="#" class="text-gray-600 text-sm font-medium hover:text-blue-500 ml-2 truncate">{{country.name.common}}</a>
+          </div>
+        </td>
+        <td class="py-2 px-4 border-b border-b-gray-50">
+          <span class="text-[13px] font-medium text-gray-500">{{country.capital}}</span>
+        </td>
+        <td class="py-2 px-4 border-b border-b-gray-50">
+          <span class="inline-block p-1 rounded text-gray-500 font-medium text-[12px] leading-none">{{country.population | number}}</span>
+        </td>
+        <td class="py-2 px-4 border-b border-b-gray-50">
+          <a [routerLink]="['/country/by/', country.cca3]" class="inline-block p-1 rounded text-blue-500 font-medium text-[12px] leading-none">Detail
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</ng-template>
