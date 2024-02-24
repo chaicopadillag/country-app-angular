@@ -10,7 +10,7 @@ import { CountryService } from '../../services/country.service';
   styles: ``,
 })
 export class CountryPageComponent implements OnInit {
-  public country?: CountryI;
+  public country?: CountryI = undefined;
 
   constructor(
     private activeRoute: ActivatedRoute,
