@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CountryI } from '../../interfaces/country.interface';
+import { RegionType } from '../../interfaces/country.interface';
 import { CountryService } from '../../services/country.service';
 
 @Component({
@@ -8,13 +8,30 @@ import { CountryService } from '../../services/country.service';
   styles: ``,
 })
 export class ByRegionPageComponent {
-  public countries: CountryI[] = [];
+  public regions: RegionType[] = [
+    'Americas',
+    'Africa',
+    'Asia',
+    'Europe',
+    'Oceania',
+  ];
 
   constructor(private countryService: CountryService) {}
 
-  searchByRegion(value: string) {
-    this.countryService.searchByRegion(value).subscribe((countries) => {
-      this.countries = countries;
-    });
+  searchByRegion(value: RegionType) {
+    this.countryService.startLoading();
+    this.countryService.searchByRegion(value);
+  }
+
+  get isLoading() {
+    return this.countryService.isLoading;
+  }
+
+  get regionActive() {
+    return this.countryService.regionActive;
+  }
+
+  get countries() {
+    return this.countryService.getCountries('byRegion');
   }
 }

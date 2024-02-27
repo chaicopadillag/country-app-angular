@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { CountryI } from '../../interfaces/country.interface';
 import { CountryService } from '../../services/country.service';
 
 @Component({
@@ -7,13 +6,17 @@ import { CountryService } from '../../services/country.service';
   templateUrl: './by-capital-page.component.html',
 })
 export class ByCapitalPageComponent {
-  public countries: CountryI[] = [];
-
   constructor(private countryService: CountryService) {}
 
   searchByCapital(value: string) {
-    this.countryService.searchByCapital(value).subscribe((countries) => {
-      this.countries = countries;
-    });
+    this.countryService.startLoading();
+    this.countryService.searchByCapital(value);
+  }
+  get isLoading() {
+    return this.countryService.isLoading;
+  }
+
+  get countries() {
+    return this.countryService.getCountries('byCapital');
   }
 }

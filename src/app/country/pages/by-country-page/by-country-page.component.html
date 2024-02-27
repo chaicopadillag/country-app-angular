@@ -3,8 +3,12 @@
   <div class="grid grid-cols-1 lg:grid-cols-1 gap-6 mb-6">
     <div class="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
       <div class="overflow-x-auto">
-        <country-table-component [countries]="countries"></country-table-component>
+        <app-spinner *ngIf="isLoading; else tableCountries"></app-spinner>
       </div>
     </div>
   </div>
 </div>
+
+<ng-template #tableCountries>
+  <country-table-component [countries]="countries"></country-table-component>
+</ng-template>

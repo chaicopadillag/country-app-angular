@@ -1,10 +1,18 @@
-<app-search-box placeholder="Buscar por region..." #keyword (onChangeValue)="searchByRegion($event)"></app-search-box>
+<!-- <app-search-box placeholder="Buscar por region..." #keyword (onChangeValue)="searchByRegion($event)"></app-search-box> -->
+<div class="grid w-full grid-cols-5 gap-2 rounded-xl p-4 border-b border-b-gray-100 px-8">
+  <button type="button" class="inline py-2 border-2 border-blue-600 text-blue-600 text-xs leading-tight uppercase rounded-full hover:bg-blue-700 hover:text-gray-100 focus:outline-none focus:ring-0 transition duration-150 ease-in-out" *ngFor="let region of regions" [ngClass]="{'bg-blue-700 text-gray-100':region===regionActive  }" (click)="searchByRegion(region)">{{region}}</button>
+</div>
+
+
 <div class="p-6">
   <div class="grid grid-cols-1 lg:grid-cols-1 gap-6 mb-6">
     <div class="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
       <div class="overflow-x-auto">
-        <country-table-component [countries]="countries"></country-table-component>
+        <app-spinner *ngIf="isLoading; else tableCountries"></app-spinner>
       </div>
     </div>
   </div>
 </div>
+<ng-template #tableCountries>
+  <country-table-component [countries]="countries"></country-table-component>
+</ng-template>
